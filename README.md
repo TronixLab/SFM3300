@@ -39,3 +39,9 @@ This secton describes the I2C communication with the SFM3X00 sensor series. Comm
 Bi-directional bus lines are implemented by the devices (master and slave) using open-drain output stages and a pull-up resistor (R) connected to the positive supply voltage (5V +- 5%). The recommended pull-up resistor value is 10kOhm. In case of long wires (>10cm) it is necessary to shield SDA and SCL. Wires longer than 30cm should not be used.
 ### **I2C Address**
 By default, the I2C address is set to 64 (0x40).
+### **Command Set and Data Transfer Sequences**
+After a data transfer is initiated by a header byte with a Write, a command is send to the slave. A command is represented by a 16-bit command code, consisting of two 8-bit frames. The commands are described below, and the data transfer sequences are specified.
+| Command |           Description        |
+| ------- | ---------------------------- |
+| 0x1000  | Start continuous measurement |
+| 0x2000  | Soft reset command           |
