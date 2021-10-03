@@ -29,8 +29,8 @@ The SFM3300 features outstanding measuring accuracy and robustness as well as a 
 * Metabolic measurements
 
 ## Arduino Interfacing
-This secton describes the I2C communication with the SFM3xxx sensor series. Communication between the master and the SFM3xxx series sensor runs via the digital I2C-interface. 
-**I2C Connection**
+This secton describes the I2C communication with the SFM3X00 sensor series. Communication between the master and the SFM3X00 series sensor runs via the digital I2C-interface. 
+### **I2C Connection**
 Bi-directional bus lines are implemented by the devices (master and slave) using open-drain output stages and a pull-up resistor (R) connected to the positive supply voltage (5V +- 5%). The recommended pull-up resistor value is 10kOhm. In case of long wires (>10cm) it is necessary to shield SDA and SCL. Wires longer than 30cm should not be used.
-**I2C Address**
+### **I2C Address**
 By default, the I2C address is set to 64 (0x40).
