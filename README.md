@@ -59,23 +59,23 @@ The SFM3000 sensor implements the CRC-8 standard based on the generator polynomi
 
 For easy implementation to a microcontroller, the following simple C++ routine can be used. Note that this code is not optimized for speed.
 ```
-//CRC
+// CRC
 #define POLYNOMIAL 0x131 //P(x)=x^8+x^5+x^4+1 = 100110001
 //============================================================
 u8t SMF3000_CheckCrc (u8t data[], u8t nbrOfBytes, u8t checksum)
 //============================================================
-//calculates checksum for n bytes of data
-//and compares it with expected checksum
-//input: data[] checksum is built based on this data
+// calculates checksum for n bytes of data
+// and compares it with expected checksum
+// input: data[] checksum is built based on this data
 // nbrOfBytes checksum is built for n bytes of data
 // checksum expected checksum
-//return: error: CHECKSUM_ERROR = checksum does not match
+// return: error: CHECKSUM_ERROR = checksum does not match
 // 0 = checksum matches
 //============================================================
 {
 u8t crc = 0;
 u8t byteCtr;
-//calculates 8-Bit checksum with given polynomial
+// calculates 8-Bit checksum with given polynomial
 for (byteCtr = 0; byteCtr < nbrOfBytes; ++byteCtr)
 { 
 crc ^= (data[byteCtr]);
@@ -96,3 +96,9 @@ CHECKSUM_ERROR = 0x04
 } etError;
 typedef unsigned char u8t;
 ```
+### **Converting measurement result to measured values**
+In order to obtain the measured flow in the predefined unit, the flow measurement result needs to be converted
+according to the following formula:
+
+**Offset** and **scale factor** can be found in the [*product datasheet*]().
+*Please note that the first measurement performed directly after chip initialization might not be valid.*
