@@ -1,2 +1,3 @@
-# SFM3300
-Arduino library for Sensirion Mass Flow Sensor, the library is revised from MyElectrons and Nabilphysics Arduino repository for SFM3300 Digital Mass Flow Sensor
+# Mass Flow Meter SFM3300
+## Proximal Flow Sensors (Autoclavable / Washable or Disposal)
+The SFM3300 mass flow meter is a sensor for proximal flow measurement in respiratory applications such as ventilation or anesthesia. There are two versions available: the SFM3300-AW is autoclavable and washable and the SFM3300-D is single-use.
