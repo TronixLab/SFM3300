@@ -45,3 +45,6 @@ After a data transfer is initiated by a header byte with a Write, a command is s
 | ------- | ---------------------------- |
 | 0x1000  | Start continuous measurement |
 | 0x2000  | Soft reset command           |
+### **Measurement Triggering**
+Flow measurements are started by writing the start measurement command (0x1000) to the sensor. Measurement results are continuously updated until measurement is stopped by sending any other command. After a start measurement command, the measurement results can be read out continuously. This means that an I2C header with R/W bit = 1 can be sent continuously to read out those results, without preceding it with command *0x1000*.
+**Note** that if the supply drops below 4.75V and back, the sensor will perform a Power on Reset and will stop measuring. If the master keeps on sending read headers without resending the start measurement command, those read requests will not be acknowledged. If the sensor does not acknowledge the start measurement command, a *hard reset* (reset the sensor through powering off and on the sensor, in case the sensor freezes) is required.
