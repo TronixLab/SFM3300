@@ -58,7 +58,7 @@ The *soft reset command* (0x2000) forces a sensor reset without switching the po
 The SFM3000 sensor implements the CRC-8 standard based on the generator polynomial: **x8 + x5 + x4 +1. (0x31)**
 
 For easy implementation to a microcontroller, the following simple C++ routine can be used. Note that this code is not optimized for speed.
-'''
+```
 //CRC
 #define POLYNOMIAL 0x131 //P(x)=x^8+x^5+x^4+1 = 100110001
 //============================================================
@@ -77,20 +77,22 @@ u8t crc = 0;
 u8t byteCtr;
 //calculates 8-Bit checksum with given polynomial
 for (byteCtr = 0; byteCtr < nbrOfBytes; ++byteCtr)
-{ crc ^= (data[byteCtr]);
-for (u8t bit = 8; bit > 0; --bit)
-{ if (crc & 0x80) crc = (crc << 1) ^ POLYNOMIAL;
-else crc = (crc << 1);
-}
-}
+{ 
+crc ^= (data[byteCtr]);
+  for (u8t bit = 8; bit > 0; --bit)
+  { 
+  if (crc & 0x80) crc = (crc << 1) ^ POLYNOMIAL;
+  else crc = (crc << 1);
+    }
+  }
 if (crc != checksum) return CHECKSUM_ERROR;
 else return 0;
 }
-'''
+```
 With the type definitions:
-'''
+```
 typedef enum{
 CHECKSUM_ERROR = 0x04
-}etError;
+} etError;
 typedef unsigned char u8t;
-'''
+```
