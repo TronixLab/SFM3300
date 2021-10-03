@@ -110,4 +110,4 @@ according to the following formula:
 ## Sample Results
 | ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/waveform.png) | 
 |:--:| 
-| **Eqn. 3** *Ventilator waveform graph using serial plotter* |
+| **Fig. 3** *Ventilator waveform graph using serial plotter* |
