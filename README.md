@@ -106,3 +106,8 @@ according to the following formula:
 
 **Offset** and **scale factor** can be found in the [*product datasheet*](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_Mass_Flow_Meters_SFM3300_Datasheet.pdf).
 *Please note that the first measurement performed directly after chip initialization might not be valid.*
+
+## Sample Results
+| ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/waveform.png) | 
+|:--:| 
+| **Eqn. 3** *Ventilator waveform graph using serial plotter* |
