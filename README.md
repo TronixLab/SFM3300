@@ -45,6 +45,52 @@ After a data transfer is initiated by a header byte with a Write, a command is s
 | ------- | ---------------------------- |
 | 0x1000  | Start continuous measurement |
 | 0x2000  | Soft reset command           |
-### **Measurement Triggering**
-Flow measurements are started by writing the start measurement command (0x1000) to the sensor. Measurement results are continuously updated until measurement is stopped by sending any other command. After a start measurement command, the measurement results can be read out continuously. This means that an I2C header with R/W bit = 1 can be sent continuously to read out those results, without preceding it with command *0x1000*.
+
+Flow measurements are started by writing the *start measurement command* (0x1000) to the sensor. Measurement results are continuously updated until measurement is stopped by sending any other command. After a start measurement command, the measurement results can be read out continuously. This means that an I2C header with R/W bit = 1 can be sent continuously to read out those results, without preceding it with command *0x1000*.
+
+The *soft reset command* (0x2000) forces a sensor reset without switching the power off and on again. On receipt of this command, the sensor reinitializes the control/status register contents from the non-volatile memory and starts operating according to these settings.
+
 **Note** that if the supply drops below 4.75V and back, the sensor will perform a Power on Reset and will stop measuring. If the master keeps on sending read headers without resending the start measurement command, those read requests will not be acknowledged. If the sensor does not acknowledge the start measurement command, a *hard reset* (reset the sensor through powering off and on the sensor, in case the sensor freezes) is required.
+
+### **CRC-8 Redundant Data Transmission**
+*Cyclic redundancy checking* (CRC) is a popular technique used for error detection in data transmission. The transmitter appends an n-bit checksum to the actual data sequence. The checksum holds redundant information about the data sequence and allows the receiver to detect transmission errors. The computed checksum can be regarded as the remainder of a polynomial division, where the dividend is the binary polynomial defined by the data sequence and the divisor is a “generator polynomial”.
+
+The SFM3000 sensor implements the CRC-8 standard based on the generator polynomial: **x8 + x5 + x4 +1. (0x31)**
+
+For easy implementation to a microcontroller, the following simple C++ routine can be used. Note that this code is not optimized for speed.
+'''
+//CRC
+#define POLYNOMIAL 0x131 //P(x)=x^8+x^5+x^4+1 = 100110001
+//============================================================
+u8t SMF3000_CheckCrc (u8t data[], u8t nbrOfBytes, u8t checksum)
+//============================================================
+//calculates checksum for n bytes of data
+//and compares it with expected checksum
+//input: data[] checksum is built based on this data
+// nbrOfBytes checksum is built for n bytes of data
+// checksum expected checksum
+//return: error: CHECKSUM_ERROR = checksum does not match
+// 0 = checksum matches
+//============================================================
+{
+u8t crc = 0;
+u8t byteCtr;
+//calculates 8-Bit checksum with given polynomial
+for (byteCtr = 0; byteCtr < nbrOfBytes; ++byteCtr)
+{ crc ^= (data[byteCtr]);
+for (u8t bit = 8; bit > 0; --bit)
+{ if (crc & 0x80) crc = (crc << 1) ^ POLYNOMIAL;
+else crc = (crc << 1);
+}
+}
+if (crc != checksum) return CHECKSUM_ERROR;
+else return 0;
+}
+'''
+With the type definitions:
+'''
+typedef enum{
+CHECKSUM_ERROR = 0x04
+}etError;
+typedef unsigned char u8t;
+'''
