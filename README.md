@@ -100,5 +100,9 @@ typedef unsigned char u8t;
 In order to obtain the measured flow in the predefined unit, the flow measurement result needs to be converted
 according to the following formula:
 
-**Offset** and **scale factor** can be found in the [*product datasheet*]().
+| ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/eqn.jpg) | 
+|:--:| 
+| **Eqn. 1** *Flow measurement express in SLM* |
+
+**Offset** and **scale factor** can be found in the [*product datasheet*](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_Mass_Flow_Meters_SFM3300_Datasheet.pdf).
 *Please note that the first measurement performed directly after chip initialization might not be valid.*
