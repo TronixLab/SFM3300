@@ -1,10 +1,10 @@
-# Mass Flow Meter SFM3300
-## [Description](https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/)
-The SFM3300 mass flow meter is a sensor for proximal flow measurement in respiratory applications such as ventilation or anesthesia. There are two versions available: the SFM3300-AW is *Autoclavable* and *Washable* and the SFM3300-D is *Disposal*.
+# Sensirion Flow Meter (SFM3300)
+## Description
+The [SFM3300 Sensirion flow meter](https://www.sensirion.com/en/flow-sensors/mass-flow-meters-for-high-precise-measurement-of-gases/proximal-flow-sensors-sfm3300-autoclavable-washable-or-single-use/) is a sensor for proximal flow measurement in respiratory applications such as ventilation or anesthesia. There are two versions available: the SFM3300-AW is *Autoclavable* and *Washable* and the SFM3300-D is *Disposal*.
 
 | ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion%201.jpg) | 
 |:--:| 
-| **Fig. 1** *Proximal Flow Sensors Sensirion* |
+| **Fig. 1** *Sensirion Proximal Flow Sensors SFM3300-AW & SFM3300-D* |
 
 The SFM3300 features outstanding measuring accuracy and robustness as well as a short signal processing time. The digital flow sensor measures bidirectional flow volumes of up to 250 slm and is fully calibrated for air, N2 and O2 gases. The special design of the flow channel results in a low dead space volume and the slightly greater pressure drop ensures more stability compared to variable inlet conditions. The sensor also features medical cones for pneumatic connection to the respiratory cycle and has a mechanical interface for a user-friendly electrical connection. Thanks to its performance characteristics, the SFM3300 mass flow meter is ideally suited for single-use proximal flow measurements in medical ventilation, hospital applications, residential care applications and emergency situations.
 
@@ -29,7 +29,7 @@ The SFM3300 features outstanding measuring accuracy and robustness as well as a 
 * Metabolic measurements
 
 ## Arduino Interfacing
-This secton describes the I2C communication with the SFM3X00 sensor series. Communication between the master and the SFM3X00 series sensor runs via the digital I2C-interface. 
+This secton describes the [I2C communication with the SFM3X00 sensor series](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_GF_AN_SFM-05_I2C_Functional_Description_D1.pdf). Communication between the master and the SFM3X00 series sensor runs via the digital I2C-interface. 
 
 | ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/ArduinoInterfacing.jpeg) | 
 |:--:| 
@@ -55,7 +55,7 @@ The *soft reset command* (0x2000) forces a sensor reset without switching the po
 ### **CRC-8 Redundant Data Transmission**
 *Cyclic redundancy checking* (CRC) is a popular technique used for error detection in data transmission. The transmitter appends an n-bit checksum to the actual data sequence. The checksum holds redundant information about the data sequence and allows the receiver to detect transmission errors. The computed checksum can be regarded as the remainder of a polynomial division, where the dividend is the binary polynomial defined by the data sequence and the divisor is a “generator polynomial”.
 
-The SFM3000 sensor implements the CRC-8 standard based on the generator polynomial: **x8 + x5 + x4 +1. (0x31)**
+The [SFM3000 sensor implements the CRC-8 standard](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_GF_AN_SFM-04_CRC_Checksum_D1.pdf) based on the generator polynomial: **x8 + x5 + x4 +1. (0x31)**
 
 For easy implementation to a microcontroller, the following simple C++ routine can be used. Note that this code is not optimized for speed.
 ```
@@ -107,7 +107,7 @@ according to the following formula:
 **Offset** and **scale factor** can be found in the [*product datasheet*](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_Mass_Flow_Meters_SFM3300_Datasheet.pdf).
 *Please note that the first measurement performed directly after chip initialization might not be valid.*
 
-## Sample Results
+## Sample Result
 | ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/waveform.png) | 
 |:--:| 
-| **Fig. 3** *Ventilator waveform graph using serial plotter* |
+| **Fig. 3** *Waveform graph using serial plotter* |
