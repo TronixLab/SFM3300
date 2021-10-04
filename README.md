@@ -31,7 +31,7 @@ The SFM3300 features outstanding measuring accuracy and robustness as well as a 
 ## Arduino Interfacing
 This secton describes the [I2C communication with the SFM3X00 sensor series](https://github.com/TronixLab/SFM3300/blob/main/docs/Sensirion_GF_AN_SFM-05_I2C_Functional_Description_D1.pdf). Communication between the master and the SFM3X00 series sensor runs via the digital I2C-interface. 
 
-| ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/ArduinoInterfacing.jpeg) | 
+| ![space-1.jpg](https://github.com/TronixLab/SFM3300/blob/main/docs/ArduinoInterfacingV2.jpeg) | 
 |:--:| 
 | **Fig. 2** *Sensirion Flow Sensor Arduino Interfacing* |
 
